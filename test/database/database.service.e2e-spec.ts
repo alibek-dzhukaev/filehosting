@@ -25,6 +25,6 @@ describe('DatabaseService', () => {
   });
 
   it('should return test_host for database host', () => {
-    expect(service.getDatabaseConfig().host).toBe('test_host');
+    expect(service.getDatabaseConfig()?.host).toBe('test_host');
   });
 });
