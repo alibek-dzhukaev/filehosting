@@ -26,7 +26,7 @@ export class UsersRepository {
   }
 
   async findOneBy(options: FindOneOptions<User>) {
-    return this.usersRepository.findOne(options)
+    return this.usersRepository.findOne(options);
   }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User | null> {

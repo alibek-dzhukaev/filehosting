@@ -15,7 +15,7 @@ export const validationSchema = Joi.object({
   // jwt validation
   JWT_SECRET: Joi.string().required(),
   JWT_EXPIRE: Joi.string().required(),
-  
+
   API_KEY: Joi.string().required(),
   API_URL: Joi.string().uri().required(),
 });

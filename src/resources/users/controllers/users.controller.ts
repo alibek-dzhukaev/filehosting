@@ -9,20 +9,23 @@ import {
   Req,
   Headers,
   Logger,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { CsrfTokenException } from '../../../common/exceptions/csrf-token.exception';
-import {Request} from 'express'
+import { Request } from 'express';
+import { JwtAuthGuard } from 'src/resources/auth/guards/jwt-auth.guard'
 
 @Controller('users')
 export class UsersController {
-  private readonly logger = new Logger(UsersController.name)
+  private readonly logger = new Logger(UsersController.name);
 
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
+  @UseGuards(JwtAuthGuard)
   async create(
     @Body() createUserDto: CreateUserDto,
     @Req() req: Request,
@@ -46,11 +49,13 @@ export class UsersController {
   }
 
   @Patch(':id')
+  @UseGuards(JwtAuthGuard)
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }

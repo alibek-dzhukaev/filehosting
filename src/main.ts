@@ -10,7 +10,7 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppDataSource } from './data-source';
 import { runMigrations } from './database/migrations';
-import { CsrfExceptionFilter } from './common/filters/csrf-exception.filter'
+import { CsrfExceptionFilter } from './common/filters/csrf-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
@@ -30,13 +30,15 @@ async function bootstrap() {
 
   app.use(cookieParser());
   app.use(helmet());
-  app.use(csurf({
-    cookie: {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-    }
-  }));
+  app.use(
+    csurf({
+      cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+      },
+    }),
+  );
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -48,7 +50,7 @@ async function bootstrap() {
 
   app.useGlobalFilters(new CsrfExceptionFilter());
   app.setGlobalPrefix(configService.get('GLOBAL_PREFIX', ''));
-  app.useGlobalFilters(new HttpExceptionFilter()); 
+  app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new LoggingInterceptor());
 
   // Swagger configuration
