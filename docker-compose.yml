@@ -28,11 +28,6 @@ services:
   postgres:
     image: postgres:13-alpine
     container_name: postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
-      POSTGRES_HOST: posgres
     env_file:
       - .env.development
     ports:
@@ -48,9 +43,6 @@ services:
   redis:
     image: redis:6-alpine
     container_name: redis
-    environment:
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
     ports:
       - '6379:6379'
     volumes:
