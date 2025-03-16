@@ -1,38 +1,54 @@
 import {
   IsDateString,
   IsEmail,
+  IsNotEmpty,
   IsNumberString,
+  IsOptional,
   IsString,
 } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
+  @IsNotEmpty()
   readonly username: string;
 
+  @IsString()
+  @IsNotEmpty()
+  readonly password: string;
+
   @IsEmail()
-  readonly email: string;
+  @IsOptional()
+  readonly email?: string;
 
   @IsString()
-  readonly firstName: string;
+  @IsOptional()
+  readonly firstName?: string;
 
   @IsString()
-  readonly lastName: string;
+  @IsOptional()
+  readonly lastName?: string;
 
   @IsNumberString()
-  readonly phone: string;
+  @IsOptional()
+  readonly phone?: string;
 
   @IsString()
-  readonly address: string;
+  @IsOptional()
+  readonly address?: string;
 
   @IsString()
-  readonly city: string;
+  @IsOptional()
+  readonly city?: string;
 
   @IsString()
-  readonly country: string;
+  @IsOptional()
+  readonly country?: string;
 
   @IsDateString()
-  readonly dateOfBirth: string;
+  @IsOptional()
+  readonly dateOfBirth?: string;
 
   @IsString()
-  readonly gender: string;
+  @IsOptional()
+  readonly gender?: string;
 }

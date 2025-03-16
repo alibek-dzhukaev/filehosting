@@ -19,6 +19,7 @@ export default () => ({
   jwt: {
     secret: process.env.JWT_SECRET,
     expireIn: process.env.JWT_EXPIRE,
+    cookieName: process.env.JWT_COOKIE,
   },
   throttle: {
     ttl: process.env.THROTTLER_TTL,
