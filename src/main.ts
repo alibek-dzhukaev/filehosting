@@ -5,8 +5,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { AppDataSource } from './data-source'
-import { runMigrations } from './database/migrations'
+import { AppDataSource } from './data-source';
+import { runMigrations } from './database/migrations';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
@@ -47,8 +47,8 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   await app.listen(port, () => {
-    console.log('\x1b[34m', `Application is running on localhost:${port}`)
+    console.log('\x1b[34m', `Application is running on localhost:${port}`);
   });
 }
 
-bootstrap();
+bootstrap().catch(console.error);

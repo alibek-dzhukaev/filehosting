@@ -1,4 +1,4 @@
-import type { DataSource } from 'typeorm'
+import type { DataSource } from 'typeorm';
 
 export const runMigrations = async (dataSource: DataSource) => {
   try {
@@ -11,4 +11,4 @@ export const runMigrations = async (dataSource: DataSource) => {
   } finally {
     await dataSource.destroy();
   }
-}
+};
