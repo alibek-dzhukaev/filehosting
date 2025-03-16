@@ -34,6 +34,7 @@ jobs:
 
   build-and-push:
     runs-on: ubuntu-latest
+    if: false
     needs: test
     steps:
       - name: Checkout code
