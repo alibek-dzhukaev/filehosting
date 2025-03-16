@@ -14,10 +14,6 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const port = configService.get<number>('PORT', 3000);
 
-  if (configService.get('RUN_MIGRATIONS') === '1') {
-    await runMigrations(AppDataSource);
-  }
-
   app.enableCors({
     origin: configService.get<string>('CORS_ORIGIN', '*'),
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -49,6 +45,10 @@ async function bootstrap() {
   await app.listen(port, () => {
     console.log('\x1b[34m', `Application is running on localhost:${port}`);
   });
+
+  if (configService.get('RUN_MIGRATIONS') === '1') {
+    await runMigrations(AppDataSource);
+  }
 }
 
 bootstrap().catch(console.error);
