@@ -7,6 +7,7 @@ export default () => ({
     name: process.env.POSTGRES_DB,
   },
   api: {
+    port: process.env.PORT,
     key: process.env.API_KEY,
     url: process.env.API_URL,
   },

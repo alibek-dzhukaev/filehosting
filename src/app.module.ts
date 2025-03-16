@@ -15,6 +15,7 @@ import {
   ThrottlerGuard,
 } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { AuthModule } from './resources/auth/auth.module'
 
 @Module({
   imports: [
@@ -65,6 +66,7 @@ import { APP_GUARD } from '@nestjs/core';
       }),
     }),
     SseModule,
+    AuthModule,
     UsersModule,
   ],
   providers: [
