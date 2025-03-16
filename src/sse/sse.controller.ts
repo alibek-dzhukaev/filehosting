@@ -9,9 +9,9 @@ export class SseController {
 
   @Get()
   @Sse()
-	@Header('Content-Type', 'text/event-stream')
-	@Header('Cache-Control', 'no-cache')
-	@Header('Connection', 'keep-alive')
+  @Header('Content-Type', 'text/event-stream')
+  @Header('Cache-Control', 'no-cache')
+  @Header('Connection', 'keep-alive')
   sse(): Observable<MessageEvent> {
     return this.sseService.getEvents();
   }

@@ -7,12 +7,15 @@ export class SseService {
   private eventSubject = new Subject<MessageEvent>();
 
   constructor() {
-    interval(1000).subscribe((_) => {
-      this.emitEvent({ message: 'Hello from SSE!', timestamp: new Date().toISOString() });
+    interval(1000).subscribe(() => {
+      this.emitEvent({
+        message: 'Hello from SSE!',
+        timestamp: new Date().toISOString(),
+      });
     });
   }
-  
-  emitEvent(data: any) {
+
+  emitEvent(data: string | object) {
     this.eventSubject.next({ data });
   }
 

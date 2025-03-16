@@ -7,6 +7,6 @@ export class DatabaseService {
   constructor(private configService: ConfigService) {}
 
   getDatabaseConfig() {
-    return this.configService.get(DATABASE_CONFIG);
+    return this.configService.get<Record<string, string>>(DATABASE_CONFIG);
   }
 }
