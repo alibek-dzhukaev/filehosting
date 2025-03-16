@@ -8,6 +8,7 @@ import {
   Delete,
   Req,
   Headers,
+  Logger,
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
@@ -17,6 +18,8 @@ import {Request} from 'express'
 
 @Controller('users')
 export class UsersController {
+  private readonly logger = new Logger(UsersController.name)
+
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
@@ -25,7 +28,6 @@ export class UsersController {
     @Req() req: Request,
     @Headers('x-csrf-token') csrfToken: string,
   ) {
-    console.log('create-body-user')
     if (!csrfToken || csrfToken !== req.csrfToken()) {
       throw new CsrfTokenException('Invalid CSRF token');
     }

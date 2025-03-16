@@ -46,10 +46,10 @@ async function bootstrap() {
     }),
   );
 
-  app.setGlobalPrefix(configService.get('GLOBAL_PREFIX', ''));
-  app.useGlobalFilters(new HttpExceptionFilter());
-  app.useGlobalInterceptors(new LoggingInterceptor());
   app.useGlobalFilters(new CsrfExceptionFilter());
+  app.setGlobalPrefix(configService.get('GLOBAL_PREFIX', ''));
+  app.useGlobalFilters(new HttpExceptionFilter()); 
+  app.useGlobalInterceptors(new LoggingInterceptor());
 
   // Swagger configuration
   const config = new DocumentBuilder()
