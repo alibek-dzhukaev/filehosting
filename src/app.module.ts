@@ -9,6 +9,12 @@ import { RedisCacheService } from './redis/redisCache.service';
 import { CacheModule } from '@nestjs/cache-manager';
 import * as redisStore from 'cache-manager-redis-store';
 import { SseModule } from './sse/sse.module';
+import {
+  ThrottlerModule,
+  ThrottlerModuleOptions,
+  ThrottlerGuard,
+} from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -46,9 +52,28 @@ import { SseModule } from './sse/sse.module';
         port: configService.get<number>('REDIS_PORT'),
       }),
     }),
+    ThrottlerModule.forRootAsync({
+      inject: [ConfigService],
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService): ThrottlerModuleOptions => ({
+        throttlers: [
+          {
+            ttl: configService.getOrThrow<number>('THROTTLER_TTL'),
+            limit: configService.getOrThrow<number>('THROTTLER_LIMIT'),
+          },
+        ],
+      }),
+    }),
     SseModule,
     UsersModule,
   ],
-  providers: [DatabaseService, RedisCacheService],
+  providers: [
+    DatabaseService,
+    RedisCacheService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
 export class AppModule {}
