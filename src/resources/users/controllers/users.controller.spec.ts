@@ -11,8 +11,8 @@ describe('UsersController', () => {
       providers: [
         {
           provide: UsersService,
-          useValue: {}
-        }
+          useValue: {},
+        },
       ],
     }).compile();
 

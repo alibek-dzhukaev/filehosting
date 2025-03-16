@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
-import { UsersRepository } from '../repositories/users.repository'
+import { UsersRepository } from '../repositories/users.repository';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -11,8 +11,8 @@ describe('UsersService', () => {
         UsersService,
         {
           provide: UsersRepository,
-          useValue: {}
-        }
+          useValue: {},
+        },
       ],
     }).compile();
 
