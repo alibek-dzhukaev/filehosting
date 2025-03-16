@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import helmet from 'helmet';
 import * as csurf from 'csurf';
+import * as cookieParser from 'cookie-parser';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
@@ -9,6 +10,7 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppDataSource } from './data-source';
 import { runMigrations } from './database/migrations';
+import { CsrfExceptionFilter } from './common/filters/csrf-exception.filter'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
@@ -26,8 +28,15 @@ async function bootstrap() {
     credentials: true,
   });
 
+  app.use(cookieParser());
   app.use(helmet());
-  app.use(csurf());
+  app.use(csurf({
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+    }
+  }));
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -40,6 +49,7 @@ async function bootstrap() {
   app.setGlobalPrefix(configService.get('GLOBAL_PREFIX', ''));
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new LoggingInterceptor());
+  app.useGlobalFilters(new CsrfExceptionFilter());
 
   // Swagger configuration
   const config = new DocumentBuilder()

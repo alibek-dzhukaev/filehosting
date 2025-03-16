@@ -6,17 +6,30 @@ import {
   Patch,
   Param,
   Delete,
+  Req,
+  Headers,
 } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
+import { CsrfTokenException } from '../../../common/exceptions/csrf-token.exception';
+import {Request} from 'express'
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
+  async create(
+    @Body() createUserDto: CreateUserDto,
+    @Req() req: Request,
+    @Headers('x-csrf-token') csrfToken: string,
+  ) {
+    console.log('create-body-user')
+    if (!csrfToken || csrfToken !== req.csrfToken()) {
+      throw new CsrfTokenException('Invalid CSRF token');
+    }
+
     return this.usersService.create(createUserDto);
   }
 
