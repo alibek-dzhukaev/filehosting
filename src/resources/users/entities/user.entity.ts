@@ -32,8 +32,9 @@ export class User {
 
   @Column({
     name: 'date_of_birthday',
+    type: 'date'
   })
-  dateOfBirthday: string;
+  dateOfBirthday: Date;
 
   @Column()
   gender: string;
