@@ -16,4 +16,12 @@ export default () => ({
     port: Number(process.env.REDIS_PORT),
     name: process.env.REDIS_DB,
   },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    expireIn: process.env.JWT_EXPIRE,
+  },
+  throttle: {
+    ttl: process.env.THROTTLER_TTL,
+    limit: process.env.THROTTLER_LIMIT,
+  },
 });

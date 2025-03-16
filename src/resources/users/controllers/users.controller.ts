@@ -16,7 +16,7 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { CsrfTokenException } from '../../../common/exceptions/csrf-token.exception';
 import { Request } from 'express';
-import { JwtAuthGuard } from 'src/resources/auth/guards/jwt-auth.guard'
+import { JwtAuthGuard } from 'src/resources/auth/guards/jwt-auth.guard';
 
 @Controller('users')
 export class UsersController {
