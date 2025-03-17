@@ -8,7 +8,7 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppDataSource } from './data-source';
 import { runMigrations } from './database/migrations';
-import { CsrfExceptionFilter } from './csrf/filters/csrf-exception.filter';
+import { CsrfExceptionFilter } from './common/csrf/filters/csrf-exception.filter';
 import { ValidationExceptionFilter } from './common/filters/validation-exception.filter';
 import * as cookieParser from 'cookie-parser';
 
