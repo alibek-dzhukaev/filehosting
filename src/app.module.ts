@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './config/configuration';
 import { validationSchema } from './config/validation.schema';
-import { DatabaseService } from './database/database.service';
+import { DatabaseService } from './common/database/database.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './resources/users/users.module';
-import { RedisCacheService } from './redis/redisCache.service';
+import { RedisCacheService } from './common/redis/redisCache.service';
 import { CacheModule } from '@nestjs/cache-manager';
 import * as redisStore from 'cache-manager-redis-store';
 import { SseModule } from './common/sse/sse.module';
@@ -17,6 +17,7 @@ import {
 import { APP_GUARD } from '@nestjs/core';
 import { AuthModule } from './resources/auth/auth.module';
 import { CsrfModule } from './common/csrf/csrf.module';
+import { BullMQModule } from './common/bullmq/bullmq.module';
 
 @Module({
   imports: [
@@ -68,6 +69,7 @@ import { CsrfModule } from './common/csrf/csrf.module';
     }),
     CsrfModule,
     SseModule,
+    BullMQModule,
     AuthModule,
     UsersModule,
   ],
