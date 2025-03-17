@@ -10,6 +10,7 @@ export default () => ({
     port: process.env.PORT,
     key: process.env.API_KEY,
     url: process.env.API_URL,
+    globalPrefix: process.env.GLOBAL_PREFIX,
   },
   redis: {
     host: process.env.REDIS_HOST,

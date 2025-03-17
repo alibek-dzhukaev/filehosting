@@ -16,6 +16,7 @@ import {
 } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthModule } from './resources/auth/auth.module';
+import {CsrfModule} from "./config/csrf/csrf.module";
 
 @Module({
   imports: [
@@ -65,6 +66,7 @@ import { AuthModule } from './resources/auth/auth.module';
         ],
       }),
     }),
+      CsrfModule,
     SseModule,
     AuthModule,
     UsersModule,
