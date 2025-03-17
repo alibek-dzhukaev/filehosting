@@ -6,8 +6,8 @@ import { AuthService } from './services/auth.service';
 import { AuthController } from './controllers/auth.controller';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { CsrfModule } from '../../csrf/csrf.module';
-import { CookieModule } from '../../cookie/cookie.module';
+import { CsrfModule } from '../../common/csrf/csrf.module';
+import { CookieModule } from '../../common/cookie/cookie.module';
 
 @Module({
   imports: [

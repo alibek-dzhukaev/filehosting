@@ -8,7 +8,7 @@ import { UsersModule } from './resources/users/users.module';
 import { RedisCacheService } from './redis/redisCache.service';
 import { CacheModule } from '@nestjs/cache-manager';
 import * as redisStore from 'cache-manager-redis-store';
-import { SseModule } from './sse/sse.module';
+import { SseModule } from './common/sse/sse.module';
 import {
   ThrottlerModule,
   ThrottlerModuleOptions,
@@ -16,7 +16,7 @@ import {
 } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthModule } from './resources/auth/auth.module';
-import { CsrfModule } from './csrf/csrf.module';
+import { CsrfModule } from './common/csrf/csrf.module';
 
 @Module({
   imports: [

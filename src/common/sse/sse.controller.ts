@@ -1,7 +1,7 @@
 import { Controller, Get, Header, Sse } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { SseService } from './sse.service';
-import { MessageEvent } from '../common/types/sse';
+import { MessageEvent } from '../types/sse';
 
 @Controller('sse')
 export class SseController {
