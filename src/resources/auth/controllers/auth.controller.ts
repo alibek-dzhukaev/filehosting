@@ -17,7 +17,6 @@ export class AuthController {
   @Post('login')
   async login(
     @Body() loginDto: LoginDto,
-    @Req() request: Request,
     @Res() response: Response,
   ) {
     const { accessToken } = await this.authService.login(loginDto);

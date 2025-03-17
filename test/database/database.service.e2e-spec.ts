@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DatabaseService } from '../../src/database/database.service';
+import { DatabaseService } from '../../src/common/database/database.service';
 import { ConfigService } from '@nestjs/config';
 
 describe('DatabaseService', () => {
