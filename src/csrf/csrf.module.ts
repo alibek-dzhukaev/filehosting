@@ -3,7 +3,7 @@ import { CsrfMiddleware } from './middlewares/csrf.middleware';
 
 @Module({})
 export class CsrfModule implements NestModule {
-    configure(consumer: MiddlewareConsumer) {
-        consumer.apply(CsrfMiddleware).forRoutes('*')
-    }
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(CsrfMiddleware).forRoutes('*');
+  }
 }

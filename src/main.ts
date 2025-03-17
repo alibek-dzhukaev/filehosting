@@ -9,7 +9,8 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppDataSource } from './data-source';
 import { runMigrations } from './database/migrations';
 import { CsrfExceptionFilter } from './csrf/filters/csrf-exception.filter';
-import {ValidationExceptionFilter} from "./common/filters/validation-exception.filter";
+import { ValidationExceptionFilter } from './common/filters/validation-exception.filter';
+import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
@@ -28,6 +29,7 @@ async function bootstrap() {
   });
 
   app.use(helmet());
+  app.use(cookieParser());
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -41,7 +43,7 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new LoggingInterceptor());
   app.useGlobalFilters(new CsrfExceptionFilter());
-  app.useGlobalFilters(new ValidationExceptionFilter())
+  app.useGlobalFilters(new ValidationExceptionFilter());
 
   // Swagger configuration
   const config = new DocumentBuilder()

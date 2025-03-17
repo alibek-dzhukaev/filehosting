@@ -25,5 +25,5 @@ export const validationSchema = Joi.object({
   API_KEY: Joi.string().required(),
   API_URL: Joi.string().uri().required(),
   PORT: Joi.string().required(),
-  GLOBAL_PREFIX: Joi.string().required()
+  GLOBAL_PREFIX: Joi.string().required(),
 });

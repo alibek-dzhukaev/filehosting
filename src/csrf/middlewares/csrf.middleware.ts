@@ -1,7 +1,7 @@
-import {Injectable, Logger, NestMiddleware} from '@nestjs/common';
-import {NextFunction, Request, Response} from 'express';
-import {doubleCsrf} from 'csrf-csrf';
-import {ConfigService} from "@nestjs/config";
+import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
+import { NextFunction, Request, Response } from 'express';
+import { doubleCsrf } from 'csrf-csrf';
+import { ConfigService } from '@nestjs/config';
 
 /**
  * CSRF Middleware
@@ -11,42 +11,45 @@ import {ConfigService} from "@nestjs/config";
  */
 @Injectable()
 export class CsrfMiddleware implements NestMiddleware {
-    private readonly logger = new Logger(CsrfMiddleware.name);
+  private readonly logger = new Logger(CsrfMiddleware.name);
 
-    constructor(
-        private readonly configService: ConfigService
-    ) {
-    }
-    private readonly csrfUtilities = doubleCsrf({
-        getSecret: () => this.configService.getOrThrow('CSRF_SECRET'),
-        cookieName: this.configService.getOrThrow('CSRF_TOKEN'),
-        cookieOptions: {
-            httpOnly: true,
-            secure: this.configService.get('NOD_ENV') === 'production',
-            sameSite: 'strict',
-        },
-    });
+  constructor(private readonly configService: ConfigService) {}
 
-    private readonly excludedRoutes: string[] = [
-        '/api/auth/login',
-        '/api/auth/register',
-    ];
+  private readonly csrfUtilities = doubleCsrf({
+    getSecret: () => this.configService.getOrThrow('CSRF_SECRET'),
+    cookieName: this.configService.getOrThrow('CSRF_TOKEN'),
+    cookieOptions: {
+      httpOnly: true,
+      secure: this.configService.get('NOD_ENV') === 'production',
+      sameSite: 'strict',
+    },
+  });
 
-    use(request: Request, response: Response, next: NextFunction): void {
-            // Generate a CSRF token and attach it to the response locals
-            response.locals.csrfToken = this.csrfUtilities.generateToken(request, response);
+  private readonly excludedRoutes: string[] = [
+    '/api/auth/login',
+    '/api/auth/register',
+  ];
 
-            // Skip CSRF protection for the login endpoint
-            if (this.isRouteExcluded(request)) {
-                this.logger.debug('CSRF protection skipped for login endpoint');
-                return next();
-            }
+  use(request: Request, response: Response, next: NextFunction): void {
+    // Generate a CSRF token and attach it to the response locals
+    response.locals.csrfToken = this.csrfUtilities.generateToken(
+      request,
+      response,
+    );
 
-            // Apply CSRF protection to all other routes
-            this.csrfUtilities.doubleCsrfProtection(request, response, next);
+    // Skip CSRF protection for the login endpoint
+    if (this.isRouteExcluded(request)) {
+      this.logger.debug('CSRF protection skipped for login endpoint');
+      return next();
     }
 
-    private isRouteExcluded(request: Request): boolean {
-        return this.excludedRoutes.some((route) => request.path.startsWith(route));
-    }
+    // Apply CSRF protection to all other routes
+    this.csrfUtilities.doubleCsrfProtection(request, response, next);
+  }
+
+  private isRouteExcluded(request: Request): boolean {
+    return this.excludedRoutes.some((route) =>
+      request.baseUrl.startsWith(route),
+    );
+  }
 }
