@@ -17,6 +17,7 @@ import {
 import { APP_GUARD } from '@nestjs/core';
 import { AuthModule } from './resources/auth/auth.module';
 import { CsrfModule } from './common/csrf/csrf.module';
+import { BullMQModule } from './common/bullmq/bullmq.module';
 
 @Module({
   imports: [
@@ -68,6 +69,7 @@ import { CsrfModule } from './common/csrf/csrf.module';
     }),
     CsrfModule,
     SseModule,
+    BullMQModule,
     AuthModule,
     UsersModule,
   ],
