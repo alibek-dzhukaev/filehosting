@@ -1,8 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import helmet from 'helmet';
-import * as csurf from 'csurf';
-import * as cookieParser from 'cookie-parser';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
@@ -10,7 +8,7 @@ import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppDataSource } from './data-source';
 import { runMigrations } from './database/migrations';
-import { CsrfExceptionFilter } from './common/filters/csrf-exception.filter';
+import { CsrfExceptionFilter } from './csrf/filters/csrf-exception.filter';
 import {ValidationExceptionFilter} from "./common/filters/validation-exception.filter";
 
 async function bootstrap() {
@@ -29,7 +27,6 @@ async function bootstrap() {
     credentials: true,
   });
 
-  app.use(cookieParser());
   app.use(helmet());
 
   app.useGlobalPipes(

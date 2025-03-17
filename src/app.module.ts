@@ -16,7 +16,7 @@ import {
 } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthModule } from './resources/auth/auth.module';
-import {CsrfModule} from "./config/csrf/csrf.module";
+import {CsrfModule} from "./csrf/csrf.module";
 
 @Module({
   imports: [

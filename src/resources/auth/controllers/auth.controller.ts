@@ -20,7 +20,6 @@ export class AuthController {
   ) {
     const { accessToken } = await this.authService.login(loginDto);
 
-    response.setHeader('X-CSRF-Token', request.csrfToken());
     response.cookie(this.configService.getOrThrow('JWT_COOKIE'), accessToken, {
       httpOnly: true,
       secure: this.configService.getOrThrow('NODE_ENV') !== 'production',
