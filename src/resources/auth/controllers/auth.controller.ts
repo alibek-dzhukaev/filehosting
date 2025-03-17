@@ -33,11 +33,10 @@ export class AuthController {
 
   @Post('logout')
   logout(@Res() response: Response) {
-    response.clearCookie(this.configService.getOrThrow('JWT_COOKIE'), {
-      httpOnly: true,
-      secure: this.configService.getOrThrow('NODE_ENV') !== 'production',
-      sameSite: 'strict',
-    });
-    return { message: 'successful' };
+    this.cookieService.clearCookie(
+      response,
+      this.configService.getOrThrow('JWT_COOKIE'),
+    );
+    response.status(HttpStatus.OK).json({ message: 'successful' });
   }
 }
