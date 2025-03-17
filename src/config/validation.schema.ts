@@ -12,7 +12,18 @@ export const validationSchema = Joi.object({
   // redis validation
   REDIS_HOST: Joi.string().default('redis'),
   REDIS_PORT: Joi.string().default(6379),
+  // jwt validation
+  JWT_SECRET: Joi.string().required(),
+  JWT_EXPIRE: Joi.string().required(),
+  JWT_COOKIE: Joi.string().required(),
+  // throttle validation
+  THROTTLER_TTL: Joi.string().required(),
+  THROTTLER_LIMIT: Joi.string().required(),
+
+  NODE_ENV: Joi.string().default('development'),
 
   API_KEY: Joi.string().required(),
   API_URL: Joi.string().uri().required(),
+  PORT: Joi.string().required(),
+  GLOBAL_PREFIX: Joi.string().required(),
 });

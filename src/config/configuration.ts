@@ -7,12 +7,23 @@ export default () => ({
     name: process.env.POSTGRES_DB,
   },
   api: {
+    port: process.env.PORT,
     key: process.env.API_KEY,
     url: process.env.API_URL,
+    globalPrefix: process.env.GLOBAL_PREFIX,
   },
   redis: {
     host: process.env.REDIS_HOST,
     port: Number(process.env.REDIS_PORT),
     name: process.env.REDIS_DB,
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    expireIn: process.env.JWT_EXPIRE,
+    cookieName: process.env.JWT_COOKIE,
+  },
+  throttle: {
+    ttl: process.env.THROTTLER_TTL,
+    limit: process.env.THROTTLER_LIMIT,
   },
 });
