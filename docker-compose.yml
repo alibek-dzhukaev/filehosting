@@ -55,6 +55,17 @@ services:
       timeout: 5s
       retries: 5
 
+  nginx:
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - node
+
 volumes:
   postgres_data:
   node_modules:
