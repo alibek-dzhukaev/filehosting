@@ -1,6 +1,8 @@
 import { Exclude } from 'class-transformer';
 import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
+import { Role } from '../../../common/roles/constants/roles.constant';
+import { IsArray, IsEnum } from 'class-validator';
 
 @Entity()
 export class User {
@@ -37,6 +39,11 @@ export class User {
 
   @Column({ nullable: true })
   gender?: string;
+
+  @Column({ default: [Role.USER], type: 'enum', enum: Role, array: true })
+  @IsArray()
+  @IsEnum(Role, { each: true })
+  roles: Role[];
 
   @BeforeInsert()
   async hashPassword() {

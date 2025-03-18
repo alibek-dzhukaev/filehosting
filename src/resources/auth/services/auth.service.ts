@@ -10,6 +10,7 @@ import { UsersService } from 'src/resources/users/services/users.service';
 import { User } from 'src/resources/users/entities/user.entity';
 import { RegisterDto } from '../dto/register.dto';
 import * as Sentry from '@sentry/node';
+import { AuthenticatedUser } from '../types/authenticatedUser';
 
 @Injectable()
 export class AuthService {
@@ -38,7 +39,11 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const payload = { username: user.username, sub: user.id };
+    const payload: AuthenticatedUser = {
+      username: user.username,
+      id: user.id,
+      roles: user.roles,
+    };
 
     return { accessToken: this.jwtService.sign(payload) };
   }

@@ -1,11 +1,13 @@
 import {
   IsDateString,
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   IsNumberString,
   IsOptional,
   IsString,
 } from 'class-validator';
+import { Role } from '../../../common/roles/constants/roles.constant';
 
 export class CreateUserDto {
   @IsString()
@@ -51,4 +53,8 @@ export class CreateUserDto {
   @IsString()
   @IsOptional()
   readonly gender?: string;
+
+  @IsOptional()
+  @IsEnum(Role, { each: true })
+  readonly roles?: Role[];
 }
