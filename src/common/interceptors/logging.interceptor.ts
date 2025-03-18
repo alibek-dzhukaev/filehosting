@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  NestInterceptor,
-  ExecutionContext,
-  CallHandler,
-} from '@nestjs/common';
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
 import { Logger } from '@nestjs/common';
 
 import { Request, Response } from 'express'; // Import the Request type from Express
@@ -25,8 +20,8 @@ export class LoggingInterceptor implements NestInterceptor {
     // Log the incoming request
     this.logger.log(
       `Incoming Request: ${method} ${url} - Body: ${JSON.stringify(
-        body,
-      )} - Query: ${JSON.stringify(query)} - Params: ${JSON.stringify(params)}`,
+        body
+      )} - Query: ${JSON.stringify(query)} - Params: ${JSON.stringify(params)}`
     );
 
     const now = Date.now();
@@ -38,11 +33,9 @@ export class LoggingInterceptor implements NestInterceptor {
         this.logger.log(
           `Outgoing Response: ${method} ${url} - Status: ${
             httpResponse.statusCode
-          } - Time: ${Date.now() - now}ms - Response: ${JSON.stringify(
-            response,
-          )}`,
+          } - Time: ${Date.now() - now}ms - Response: ${JSON.stringify(response)}`
         );
-      }),
+      })
     );
   }
 }

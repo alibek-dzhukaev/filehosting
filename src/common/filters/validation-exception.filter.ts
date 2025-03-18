@@ -38,7 +38,7 @@ export class ValidationExceptionFilter implements ExceptionFilter {
   }
 
   private formatValidationErrors(
-    validationResponse: string | object,
+    validationResponse: string | object
   ): { field: string; messages: string[] }[] {
     if (typeof validationResponse === 'string') {
       // Handle string responses (e.g., "Bad Request")

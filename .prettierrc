@@ -7,7 +7,5 @@
   "printWidth": 100,
   "bracketSpacing": true,
   "arrowParens": "always",
-  "endOfLine": "lf",
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "endOfLine": "lf"
 }

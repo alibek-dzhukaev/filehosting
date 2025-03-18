@@ -5,10 +5,10 @@ export class AddRoleField1742286184073 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `CREATE TYPE "public"."user_roles_enum" AS ENUM('super_admin', 'admin', 'user')`,
+      `CREATE TYPE "public"."user_roles_enum" AS ENUM('super_admin', 'admin', 'user')`
     );
     await queryRunner.query(
-      `ALTER TABLE "user" ADD "roles" "public"."user_roles_enum" array NOT NULL DEFAULT '{user}'`,
+      `ALTER TABLE "user" ADD "roles" "public"."user_roles_enum" array NOT NULL DEFAULT '{user}'`
     );
   }
 

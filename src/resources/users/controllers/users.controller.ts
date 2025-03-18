@@ -51,7 +51,7 @@ export class UsersController {
   update(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
-    @User() user: AuthenticatedUser,
+    @User() user: AuthenticatedUser
   ) {
     if (user.roles.includes(Role.USER) && user.id !== id) {
       throw new ForbiddenException('Access denied. Insufficient permissions.');

@@ -46,7 +46,7 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
-    }),
+    })
   );
 
   app.setGlobalPrefix(configService.get('GLOBAL_PREFIX', ''));

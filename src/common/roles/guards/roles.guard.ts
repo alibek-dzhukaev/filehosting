@@ -1,10 +1,5 @@
 // src/roles/guards/roles.guard.ts
-import {
-  Injectable,
-  CanActivate,
-  ExecutionContext,
-  ForbiddenException,
-} from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext, ForbiddenException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
 import { Request } from 'express';
@@ -17,10 +12,7 @@ export class RolesGuard implements CanActivate {
   constructor(private reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
-    const requiredRoles = this.reflector.get<Role[]>(
-      ROLES_KEY,
-      context.getHandler(),
-    );
+    const requiredRoles = this.reflector.get<Role[]>(ROLES_KEY, context.getHandler());
     if (!requiredRoles) {
       return true; // No roles are required, allow access
     }

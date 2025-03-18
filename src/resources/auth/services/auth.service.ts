@@ -1,8 +1,4 @@
-import {
-  ConflictException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import * as Sentry from '@sentry/node';
@@ -18,12 +14,12 @@ import { AuthenticatedUser } from '../types/authenticatedUser';
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
-    private readonly jwtService: JwtService,
+    private readonly jwtService: JwtService
   ) {}
 
   async validateUser(
     username: string,
-    password: string,
+    password: string
   ): Promise<Omit<User, 'password' | 'hashPassword'> | null> {
     const user = await this.usersService.findOneByUsername(username);
     if (user && (await bcrypt.compare(password, user.password))) {

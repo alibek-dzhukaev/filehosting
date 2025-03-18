@@ -17,9 +17,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
-    const status = exception.getStatus
-      ? exception.getStatus()
-      : HttpStatus.INTERNAL_SERVER_ERROR;
+    const status = exception.getStatus ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
 
     const errorResponse = {
       statusCode: status,
@@ -32,7 +30,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     // Log the error
     this.logger.error(
       `HTTP Exception: ${status} - ${request.method} ${request.url}`,
-      exception.stack,
+      exception.stack
     );
 
     // Send the custom error response

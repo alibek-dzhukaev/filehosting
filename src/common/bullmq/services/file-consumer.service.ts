@@ -15,14 +15,12 @@ export class FileConsumerService implements OnModuleInit {
     this.worker = new Worker(
       BullMqQueues.FILE,
       async (job) => {
-        console.log(
-          `Processing job ${job.id} with data: ${JSON.stringify(job.data)}`,
-        );
+        console.log(`Processing job ${job.id} with data: ${JSON.stringify(job.data)}`);
         // Simulate some work
         await new Promise((resolve) => setTimeout(resolve, 1000));
         console.log(`Job ${job.id} completed`);
       },
-      { connection: this.redis },
+      { connection: this.redis }
     );
 
     this.worker.on('failed', (job, err) => {

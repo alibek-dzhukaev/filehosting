@@ -2,11 +2,7 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
-import {
-  ThrottlerModule,
-  ThrottlerModuleOptions,
-  ThrottlerGuard,
-} from '@nestjs/throttler';
+import { ThrottlerModule, ThrottlerModuleOptions, ThrottlerGuard } from '@nestjs/throttler';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import * as redisStore from 'cache-manager-redis-store';

@@ -14,7 +14,7 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly configService: ConfigService,
-    private readonly cookieService: CookieService,
+    private readonly cookieService: CookieService
   ) {}
 
   @Post('login')
@@ -32,10 +32,7 @@ export class AuthController {
 
   @Post('logout')
   logout(@Res() response: Response) {
-    this.cookieService.clearCookie(
-      response,
-      this.configService.getOrThrow('JWT_COOKIE'),
-    );
+    this.cookieService.clearCookie(response, this.configService.getOrThrow('JWT_COOKIE'));
     response.status(HttpStatus.OK).json({ message: 'successful' });
   }
 }

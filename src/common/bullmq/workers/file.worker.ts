@@ -10,13 +10,11 @@ export const createFileWorker = (redis: Redis) => {
     BullMqQueues.FILE,
     async (job: Job) => {
       const logger = new Logger('fileWorker');
-      logger.log(
-        `Processing job ${job.id} with data: ${JSON.stringify(job.data)}`,
-      );
+      logger.log(`Processing job ${job.id} with data: ${JSON.stringify(job.data)}`);
       // Simulate some work
       await new Promise((resolve) => setTimeout(resolve, 1000));
       logger.log(`Job ${job.id} completed`);
     },
-    { connection: redis },
+    { connection: redis }
   );
 };
