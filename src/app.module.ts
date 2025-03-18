@@ -1,23 +1,28 @@
+import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import configuration from './config/configuration';
-import { validationSchema } from '@config/validation.schema';
-import { DatabaseService } from '@common/database/database.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from '@resources/users/users.module';
-import { RedisCacheService } from '@common/redis/redisCache.service';
-import { CacheModule } from '@nestjs/cache-manager';
-import * as redisStore from 'cache-manager-redis-store';
-import { SseModule } from '@common/sse/sse.module';
+import { APP_GUARD } from '@nestjs/core';
 import {
   ThrottlerModule,
   ThrottlerModuleOptions,
   ThrottlerGuard,
 } from '@nestjs/throttler';
-import { APP_GUARD } from '@nestjs/core';
-import { AuthModule } from '@resources/auth/auth.module';
-import { CsrfModule } from '@common/csrf/csrf.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+import * as redisStore from 'cache-manager-redis-store';
+
 import { BullMQModule } from '@common/bullmq/bullmq.module';
+import { CsrfModule } from '@common/csrf/csrf.module';
+import { DatabaseService } from '@common/database/database.service';
+import { RedisCacheService } from '@common/redis/redisCache.service';
+import { SseModule } from '@common/sse/sse.module';
+
+import { validationSchema } from '@config/validation.schema';
+
+import { AuthModule } from '@resources/auth/auth.module';
+import { UsersModule } from '@resources/users/users.module';
+
+import configuration from './config/configuration';
 
 @Module({
   imports: [

@@ -1,10 +1,13 @@
 import { Controller, Post, Body, Res, HttpStatus } from '@nestjs/common';
-import { AuthService } from '../services/auth.service';
+import { ConfigService } from '@nestjs/config';
+
+import { Response } from 'express';
+
+import { CookieService } from '@common/cookie/services/cookie.service';
+
 import { LoginDto } from '../dto/login.dto';
 import { RegisterDto } from '../dto/register.dto';
-import { Response } from 'express';
-import { ConfigService } from '@nestjs/config';
-import { CookieService } from '@common/cookie/services/cookie.service';
+import { AuthService } from '../services/auth.service';
 
 @Controller('auth')
 export class AuthController {

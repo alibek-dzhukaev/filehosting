@@ -4,10 +4,11 @@ import {
   ExecutionContext,
   CallHandler,
 } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
+
+import { Request, Response } from 'express'; // Import the Request type from Express
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Logger } from '@nestjs/common';
-import { Request, Response } from 'express'; // Import the Request type from Express
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {

@@ -7,6 +7,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+
 import { Role } from '../../../common/roles/constants/roles.constant';
 
 export class CreateUserDto {

@@ -1,8 +1,10 @@
-import { Injectable } from '@nestjs/common';
 import { InjectQueue } from '@nestjs/bullmq';
+import { Injectable } from '@nestjs/common';
+
 import { Queue } from 'bullmq';
-import { BullMqQueues } from '../constants/queues';
+
 import { BullMqJobs } from '../constants/jobs';
+import { BullMqQueues } from '../constants/queues';
 
 @Injectable()
 export class FileProducerService {

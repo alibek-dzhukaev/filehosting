@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
-import { CookieService } from './services/cookie.service';
 import { ConfigModule } from '@nestjs/config';
+
+import { CookieService } from './services/cookie.service';
 
 @Module({
   imports: [ConfigModule],

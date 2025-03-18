@@ -1,6 +1,8 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
+
 import { Worker } from 'bullmq';
 import { Redis } from 'ioredis';
+
 import { BullMqQueues } from '../constants/queues';
 
 @Injectable()

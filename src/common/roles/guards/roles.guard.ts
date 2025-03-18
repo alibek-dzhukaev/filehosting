@@ -6,9 +6,11 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+
+import { Request } from 'express';
+
 import { Role } from '../constants/roles.constant';
 import { ROLES_KEY } from '../decorators/roles.decorator';
-import { Request } from 'express';
 
 @Injectable()
 export class RolesGuard implements CanActivate {

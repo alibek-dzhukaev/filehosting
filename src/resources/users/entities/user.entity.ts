@@ -1,8 +1,9 @@
-import { Exclude } from 'class-transformer';
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
-import { Role } from '../../../common/roles/constants/roles.constant';
+import { Exclude } from 'class-transformer';
 import { IsArray, IsEnum } from 'class-validator';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
+
+import { Role } from '../../../common/roles/constants/roles.constant';
 
 @Entity()
 export class User {

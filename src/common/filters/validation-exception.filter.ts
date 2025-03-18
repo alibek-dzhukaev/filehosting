@@ -5,7 +5,9 @@ import {
   HttpStatus,
   BadRequestException,
 } from '@nestjs/common';
+
 import { Response } from 'express';
+
 import { ValidationErrorResponse } from '../types/validation-error.response';
 
 @Catch(BadRequestException)

@@ -9,15 +9,16 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { UsersService } from '../services/users.service';
+
+import { Role } from '../../../common/roles/constants/roles.constant';
+import { Roles } from '../../../common/roles/decorators/roles.decorator';
+import { RolesGuard } from '../../../common/roles/guards/roles.guard';
+import { User } from '../../auth/decorators/user.decorator';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { AuthenticatedUser } from '../../auth/types/authenticatedUser';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
-import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
-import { RolesGuard } from '../../../common/roles/guards/roles.guard';
-import { Roles } from '../../../common/roles/decorators/roles.decorator';
-import { Role } from '../../../common/roles/constants/roles.constant';
-import { User } from '../../auth/decorators/user.decorator';
-import { AuthenticatedUser } from '../../auth/types/authenticatedUser';
+import { UsersService } from '../services/users.service';
 
 @Controller('users')
 export class UsersController {

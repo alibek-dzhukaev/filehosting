@@ -1,7 +1,8 @@
 import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
-import { NextFunction, Request, Response } from 'express';
-import { doubleCsrf } from 'csrf-csrf';
 import { ConfigService } from '@nestjs/config';
+
+import { doubleCsrf } from 'csrf-csrf';
+import { NextFunction, Request, Response } from 'express';
 
 /**
  * CSRF Middleware

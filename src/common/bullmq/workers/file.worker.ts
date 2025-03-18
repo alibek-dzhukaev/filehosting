@@ -1,6 +1,8 @@
-import { Job, Worker } from 'bullmq';
 import { Logger } from '@nestjs/common';
+
+import { Job, Worker } from 'bullmq';
 import { Redis } from 'ioredis';
+
 import { BullMqQueues } from '../constants/queues';
 
 export const createFileWorker = (redis: Redis) => {
