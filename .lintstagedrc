@@ -1,0 +1,10 @@
+{
+  "src/**/*.ts": [
+    "pnpm lint",
+    "pnpm format"
+  ],
+  "test/**/*.ts": [
+    "pnpm lint",
+    "pnpm format"
+  ]
+}
