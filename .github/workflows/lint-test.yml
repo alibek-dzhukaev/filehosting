@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  NODE_ENV: test
+  NODE_ENV: development
 
 jobs:
   test:
