@@ -1,0 +1,9 @@
+{
+  "build": {
+    "command": "pnpm build",
+    "directory": "dist"
+  },
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
