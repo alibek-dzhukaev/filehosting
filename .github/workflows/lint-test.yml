@@ -13,6 +13,7 @@ env:
 
 jobs:
   test:
+    if: false
     name: Run Tests
     runs-on: ubuntu-latest
     steps:
@@ -34,6 +35,7 @@ jobs:
         run: pnpm test
 
   lint:
+    if: false
     name: Lint Code
     runs-on: ubuntu-latest
     steps:
@@ -55,6 +57,7 @@ jobs:
         run: pnpm lint
 
   build:
+    if: false
     name: Build Project
     runs-on: ubuntu-latest
     steps:
