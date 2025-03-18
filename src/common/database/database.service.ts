@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+
 import { DATABASE_CONFIG } from '@config/constants';
 
 @Injectable()

@@ -1,7 +1,8 @@
 import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
-import { NextFunction, Request, Response } from 'express';
-import { doubleCsrf } from 'csrf-csrf';
 import { ConfigService } from '@nestjs/config';
+
+import { doubleCsrf } from 'csrf-csrf';
+import { NextFunction, Request, Response } from 'express';
 
 /**
  * CSRF Middleware
@@ -25,17 +26,11 @@ export class CsrfMiddleware implements NestMiddleware {
     },
   });
 
-  private readonly excludedRoutes: string[] = [
-    '/api/auth/login',
-    '/api/auth/register',
-  ];
+  private readonly excludedRoutes: string[] = ['/api/auth/login', '/api/auth/register'];
 
   use(request: Request, response: Response, next: NextFunction): void {
     // Generate a CSRF token and attach it to the response locals
-    response.locals.csrfToken = this.csrfUtilities.generateToken(
-      request,
-      response,
-    );
+    response.locals.csrfToken = this.csrfUtilities.generateToken(request, response);
 
     // Skip CSRF protection for the login endpoint
     if (this.isRouteExcluded(request)) {
@@ -48,8 +43,6 @@ export class CsrfMiddleware implements NestMiddleware {
   }
 
   private isRouteExcluded(request: Request): boolean {
-    return this.excludedRoutes.some((route) =>
-      request.baseUrl.startsWith(route),
-    );
+    return this.excludedRoutes.some((route) => request.baseUrl.startsWith(route));
   }
 }

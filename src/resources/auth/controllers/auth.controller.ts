@@ -1,17 +1,20 @@
 import { Controller, Post, Body, Res, HttpStatus } from '@nestjs/common';
-import { AuthService } from '../services/auth.service';
+import { ConfigService } from '@nestjs/config';
+
+import { Response } from 'express';
+
+import { CookieService } from '@common/cookie/services/cookie.service';
+
 import { LoginDto } from '../dto/login.dto';
 import { RegisterDto } from '../dto/register.dto';
-import { Response } from 'express';
-import { ConfigService } from '@nestjs/config';
-import { CookieService } from '@common/cookie/services/cookie.service';
+import { AuthService } from '../services/auth.service';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly configService: ConfigService,
-    private readonly cookieService: CookieService,
+    private readonly cookieService: CookieService
   ) {}
 
   @Post('login')
@@ -29,10 +32,7 @@ export class AuthController {
 
   @Post('logout')
   logout(@Res() response: Response) {
-    this.cookieService.clearCookie(
-      response,
-      this.configService.getOrThrow('JWT_COOKIE'),
-    );
+    this.cookieService.clearCookie(response, this.configService.getOrThrow('JWT_COOKIE'));
     response.status(HttpStatus.OK).json({ message: 'successful' });
   }
 }

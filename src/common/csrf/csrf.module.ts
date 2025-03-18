@@ -1,4 +1,5 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+
 import { CsrfMiddleware } from './middlewares/csrf.middleware';
 
 @Module({})

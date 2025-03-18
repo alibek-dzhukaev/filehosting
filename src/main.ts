@@ -1,17 +1,20 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import helmet from 'helmet';
-import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
-import { HttpExceptionFilter } from '@common/filters/http-exception.filter';
-import { LoggingInterceptor } from '@common/interceptors/logging.interceptor';
+import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { AppDataSource } from './data-source';
-import { runMigrations } from '@common/database/migrations';
-import { CsrfExceptionFilter } from '@common/csrf/filters/csrf-exception.filter';
-import { ValidationExceptionFilter } from '@common/filters/validation-exception.filter';
-import * as cookieParser from 'cookie-parser';
+
 import * as Sentry from '@sentry/node';
+import * as cookieParser from 'cookie-parser';
+import helmet from 'helmet';
+
+import { CsrfExceptionFilter } from '@common/csrf/filters/csrf-exception.filter';
+import { runMigrations } from '@common/database/migrations';
+import { HttpExceptionFilter } from '@common/filters/http-exception.filter';
+import { ValidationExceptionFilter } from '@common/filters/validation-exception.filter';
+import { LoggingInterceptor } from '@common/interceptors/logging.interceptor';
+
+import { AppModule } from './app.module';
+import { AppDataSource } from './data-source';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
@@ -43,7 +46,7 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
-    }),
+    })
   );
 
   app.setGlobalPrefix(configService.get('GLOBAL_PREFIX', ''));

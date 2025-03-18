@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+
 import { CookieOptions, Request, Response } from 'express';
 
 @Injectable()
@@ -7,14 +8,9 @@ export class CookieService {
   constructor(private readonly configService: ConfigService) {}
 
   setJwt(response: Response, accessToken: string) {
-    this.setCookie(
-      response,
-      this.configService.getOrThrow<string>('JWT_COOKIE'),
-      accessToken,
-      {
-        maxAge: this.configService.get<number>('JWT_EXPIRE'),
-      },
-    );
+    this.setCookie(response, this.configService.getOrThrow<string>('JWT_COOKIE'), accessToken, {
+      maxAge: this.configService.get<number>('JWT_EXPIRE'),
+    });
   }
 
   clearCookie(response: Response, name: string): void {
@@ -34,7 +30,7 @@ export class CookieService {
     response: Response,
     name: string,
     value: string,
-    options: CookieOptions = {},
+    options: CookieOptions = {}
   ): void {
     const defaultOptions: CookieOptions = {
       httpOnly: true,

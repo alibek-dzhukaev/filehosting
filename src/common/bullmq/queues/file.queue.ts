@@ -1,8 +1,10 @@
 import { InjectQueue, Processor } from '@nestjs/bullmq';
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
+
 import { Queue } from 'bullmq';
-import { BullMqQueues } from '../constants/queues';
+
 import { BullMqJobs } from '../constants/jobs';
+import { BullMqQueues } from '../constants/queues';
 
 @Processor(BullMqQueues.FILE)
 @Injectable()
