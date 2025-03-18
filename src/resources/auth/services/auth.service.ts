@@ -9,6 +9,7 @@ import { LoginDto } from '../dto/login.dto';
 import { UsersService } from 'src/resources/users/services/users.service';
 import { User } from 'src/resources/users/entities/user.entity';
 import { RegisterDto } from '../dto/register.dto';
+import * as Sentry from '@sentry/node';
 
 @Injectable()
 export class AuthService {
@@ -33,6 +34,7 @@ export class AuthService {
   async login(loginDto: LoginDto) {
     const user = await this.validateUser(loginDto.username, loginDto.password);
     if (!user) {
+      Sentry.captureException("Invalid credentials");
       throw new UnauthorizedException('Invalid credentials');
     }
 

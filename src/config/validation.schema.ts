@@ -19,6 +19,8 @@ export const validationSchema = Joi.object({
   // throttle validation
   THROTTLER_TTL: Joi.string().required(),
   THROTTLER_LIMIT: Joi.string().required(),
+  // sentry validation
+  SENTRY_DSN: Joi.string().required(),
 
   NODE_ENV: Joi.string().default('development'),
 
