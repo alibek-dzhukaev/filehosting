@@ -25,18 +25,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: 'pnpm'
 
       - name: Install pnpm
-        run: |
-          corepack enable && corepack prepare pnpm@latest --activate || npm install -g pnpm
-
-      - name: Verify pnpm installation
-        run: |
-          node -v
-          npm -v
-          pnpm -v
-          which pnpm
+        run: npm install -g pnpm
 
       - name: Install dependencies
         run: pnpm install
@@ -57,18 +48,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: 'pnpm'
 
       - name: Install pnpm
-        run: |
-          corepack enable && corepack prepare pnpm@latest --activate || npm install -g pnpm
-
-      - name: Verify pnpm installation
-        run: |
-          node -v
-          npm -v
-          pnpm -v
-          which pnpm
+        run: npm install -g pnpm
 
       - name: Install dependencies
         run: pnpm install
