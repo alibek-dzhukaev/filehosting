@@ -10,7 +10,7 @@ on:
 
 env:
   NODE_ENV: test
-  DOCKER_IMAGE_NAME: my-app
+  DOCKER_IMAGE_NAME: filehosting
   RAILWAY_REGISTRY: railway.app/${{ secrets.RAILWAY_PROJECT_ID }}
 
 jobs:
