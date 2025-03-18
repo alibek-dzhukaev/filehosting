@@ -22,8 +22,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 18
           cache: 'pnpm'
+
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@latest --activate
 
       - name: Install dependencies
         run: pnpm install
@@ -44,6 +47,9 @@ jobs:
           node-version: 18
           cache: 'pnpm'
 
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@latest --activate
+
       - name: Install dependencies
         run: pnpm install
 
@@ -62,6 +68,9 @@ jobs:
         with:
           node-version: 18
           cache: 'pnpm'
+
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@latest --activate
 
       - name: Install dependencies
         run: pnpm install

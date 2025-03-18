@@ -25,7 +25,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@latest --activate
 
       - name: Install dependencies
         run: pnpm install
@@ -37,13 +39,21 @@ jobs:
     name: Build and Push Docker Image
     runs-on: ubuntu-latest
     needs: test
-    if: github.ref == 'refs/heads/main' 
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Log in to Docker Registry (Railway)
-        run: echo "${{ secrets.RAILWAY_TOKEN }}" | docker login railway.app -u unused --password-stdin
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        run: corepack enable && corepack prepare pnpm@latest --activate
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Build Docker image
         run: docker build -t ${{ env.DOCKER_IMAGE_NAME }} .
