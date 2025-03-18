@@ -11,6 +11,7 @@ import { runMigrations } from '@common/database/migrations';
 import { CsrfExceptionFilter } from '@common/csrf/filters/csrf-exception.filter';
 import { ValidationExceptionFilter } from '@common/filters/validation-exception.filter';
 import * as cookieParser from 'cookie-parser';
+import * as Sentry from '@sentry/node';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
@@ -21,6 +22,12 @@ async function bootstrap() {
   if (configService.get('RUN_MIGRATIONS') === '1') {
     await runMigrations(AppDataSource);
   }
+
+  Sentry.init({
+    dsn: configService.getOrThrow<string>('SENTRY_DSN'),
+    environment: configService.getOrThrow<string>('NODE_ENV'),
+    tracesSampleRate: 1.0,
+  });
 
   app.enableCors({
     origin: configService.get<string>('CORS_ORIGIN', '*'),
