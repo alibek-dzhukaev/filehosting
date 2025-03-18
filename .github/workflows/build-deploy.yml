@@ -9,13 +9,14 @@ on:
       - main
 
 env:
-  NODE_ENV: test
+  NODE_ENV: production
   DOCKER_IMAGE_NAME: filehosting
   RAILWAY_REGISTRY: railway.app/${{ secrets.RAILWAY_PROJECT_ID }}
 
 jobs:
   test:
     name: Run Tests
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
