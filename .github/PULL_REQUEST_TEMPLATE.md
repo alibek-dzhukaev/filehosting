@@ -1,3 +1,10 @@
+---
+name: Feature Request
+about: Describe the feature you're proposing.
+title: "[PR]"
+labels: enhancement
+---
+
 ## Description
 
 
