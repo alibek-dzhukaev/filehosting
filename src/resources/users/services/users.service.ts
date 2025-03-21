@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
 
+import { In } from 'typeorm';
+
+import { User } from '@resources/users/entities/user.entity';
+
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { UsersRepository } from '../repositories/users.repository';
@@ -18,6 +22,10 @@ export class UsersService {
 
   findOne(id: string) {
     return this.usersRepository.findOneById(id);
+  }
+
+  async findByIds(userIds: User['id'][]) {
+    return this.usersRepository.findManyBy({ where: { id: In(userIds) } });
   }
 
   async findOneByUsername(username: string) {

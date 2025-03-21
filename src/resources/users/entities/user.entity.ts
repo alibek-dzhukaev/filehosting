@@ -1,9 +1,18 @@
 import * as bcrypt from 'bcryptjs';
 import { Exclude } from 'class-transformer';
 import { IsArray, IsEnum } from 'class-validator';
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  BeforeInsert,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 
-import { Role } from '../../../common/roles/constants/roles.constant';
+import { Role } from '@common/roles/constants/roles.constant';
+
+import { Channel } from '../../channels/entities/channel.entity';
 
 @Entity()
 export class User {
@@ -45,6 +54,14 @@ export class User {
   @IsArray()
   @IsEnum(Role, { each: true })
   roles: Role[];
+
+  @ManyToMany(() => Channel, (channel) => channel.members)
+  @JoinTable()
+  channels: Channel[];
+
+  @ManyToMany(() => Channel, (channel) => channel.admins)
+  @JoinTable()
+  adminChannels: Channel[];
 
   @BeforeInsert()
   async hashPassword() {

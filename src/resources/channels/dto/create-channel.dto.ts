@@ -15,10 +15,6 @@ export class CreateChannelDto {
   @IsOptional()
   readonly type?: ChannelType;
 
-  @IsString()
-  @IsNotEmpty()
-  readonly ownerId: string;
-
   @IsOptional()
   @IsBoolean()
   readonly isReadonly?: boolean;
@@ -35,4 +31,14 @@ export class CreateChannelDto {
   @IsString({ each: true })
   @IsArray()
   readonly tags?: string[];
+
+  @IsOptional()
+  @IsString({ each: true })
+  @IsArray()
+  readonly adminIds?: string[];
+
+  @IsOptional()
+  @IsString({ each: true })
+  @IsArray()
+  readonly memberIds?: string[];
 }

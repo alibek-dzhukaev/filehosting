@@ -8,11 +8,14 @@ import {
   Patch,
   Post,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 
-import { Role } from '../../../common/roles/constants/roles.constant';
-import { Roles } from '../../../common/roles/decorators/roles.decorator';
-import { RolesGuard } from '../../../common/roles/guards/roles.guard';
+import { TransactionInterceptor } from '@common/interceptors/transaction.interceptor';
+import { Role } from '@common/roles/constants/roles.constant';
+import { Roles } from '@common/roles/decorators/roles.decorator';
+import { RolesGuard } from '@common/roles/guards/roles.guard';
+
 import { User } from '../../auth/decorators/user.decorator';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { AuthenticatedUser } from '../../auth/types/authenticatedUser';
@@ -27,6 +30,7 @@ export class UsersController {
   @Post()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.ADMIN, Role.SUPER_ADMIN)
+  @UseInterceptors(TransactionInterceptor)
   async create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
@@ -48,6 +52,7 @@ export class UsersController {
   @Patch(':id')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.USER, Role.ADMIN, Role.SUPER_ADMIN)
+  @UseInterceptors(TransactionInterceptor)
   update(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
@@ -62,6 +67,7 @@ export class UsersController {
   @Delete(':id')
   @Roles(Role.ADMIN, Role.SUPER_ADMIN)
   @UseGuards(JwtAuthGuard, RolesGuard)
+  @UseInterceptors(TransactionInterceptor)
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }

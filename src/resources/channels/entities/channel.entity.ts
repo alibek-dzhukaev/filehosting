@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
+
+import { User } from '@app/resources/users/entities/user.entity';
 
 import { ChannelType } from '../types/ChannelType';
 
@@ -34,9 +36,6 @@ export class Channel {
   })
   updatedAt: Date;
 
-  @Column({ name: 'owner_id' })
-  ownerId: string;
-
   @Column({ default: false, name: 'is_archived' })
   isArchived: boolean;
 
@@ -51,4 +50,10 @@ export class Channel {
 
   @Column('text', { array: true, nullable: true })
   tags: string[];
+
+  @ManyToMany(() => User, (user) => user.channels)
+  members: User[];
+
+  @ManyToMany(() => User, (user) => user.adminChannels, { cascade: ['insert', 'update'] })
+  admins: User[];
 }

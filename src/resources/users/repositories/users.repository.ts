@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { FindOneOptions, Repository } from 'typeorm';
+import { FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
@@ -29,6 +29,10 @@ export class UsersRepository {
 
   async findOneBy(options: FindOneOptions<User>) {
     return this.usersRepository.findOne(options);
+  }
+
+  async findManyBy(options: FindManyOptions<User>) {
+    return this.usersRepository.find(options);
   }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User | null> {
