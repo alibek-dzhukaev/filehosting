@@ -19,6 +19,7 @@ import { AuthModule } from '@resources/auth/auth.module';
 import { UsersModule } from '@resources/users/users.module';
 
 import configuration from './config/configuration';
+import { ChannelsModule } from './resources/channels/channels.module';
 
 @Module({
   imports: [
@@ -73,6 +74,7 @@ import configuration from './config/configuration';
     BullMQModule,
     AuthModule,
     UsersModule,
+    ChannelsModule,
   ],
   providers: [
     DatabaseService,
