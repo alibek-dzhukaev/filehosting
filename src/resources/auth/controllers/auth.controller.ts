@@ -37,7 +37,6 @@ export class AuthController {
   @Post('me')
   @UseGuards(JwtAuthGuard)
   me(@User() user: AuthenticatedUser) {
-    console.log('user', user);
     return user;
   }
 
@@ -45,7 +44,6 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   logout(@Res() response: Response) {
     this.cookieService.clearJwt(response);
-    this.cookieService.clearCsrfTokens(response);
     response.status(HttpStatus.OK).json({ message: 'successful' });
   }
 }
