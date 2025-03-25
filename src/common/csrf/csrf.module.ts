@@ -1,10 +1,20 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { Module, NestModule } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 
-import { CsrfMiddleware } from './middlewares/csrf.middleware';
+import { CookieModule } from '@common/cookie/cookie.module';
 
-@Module({})
+@Module({
+  imports: [ConfigModule, CookieModule],
+})
 export class CsrfModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(CsrfMiddleware).forRoutes('*');
+  constructor() {}
+
+  configure() {
+    // consumer: MiddlewareConsumer
+    // consumer
+    //   .apply((request: Request, response: Response, next: NextFunction) => {
+    //     new CsrfMiddleware(this.configService, this.cookieService).use(request, response, next);
+    //   })
+    //   .forRoutes('*');
   }
 }

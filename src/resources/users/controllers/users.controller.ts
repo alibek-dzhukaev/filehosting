@@ -4,15 +4,18 @@ import {
   Delete,
   ForbiddenException,
   Get,
+  HttpStatus,
   Param,
   Patch,
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { ApiOkResponse, ApiResponse } from '@nestjs/swagger';
 
-import { Role } from '../../../common/roles/constants/roles.constant';
-import { Roles } from '../../../common/roles/decorators/roles.decorator';
-import { RolesGuard } from '../../../common/roles/guards/roles.guard';
+import { Role } from '@common/roles/constants/roles.constant';
+import { Roles } from '@common/roles/decorators/roles.decorator';
+import { RolesGuard } from '@common/roles/guards/roles.guard';
+
 import { User } from '../../auth/decorators/user.decorator';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { AuthenticatedUser } from '../../auth/types/authenticatedUser';
@@ -29,6 +32,16 @@ export class UsersController {
   @Roles(Role.ADMIN, Role.SUPER_ADMIN)
   async create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
+  }
+
+  @Post('profile')
+  @ApiOkResponse()
+  @ApiResponse({
+    status: HttpStatus.OK,
+  })
+  @UseGuards(JwtAuthGuard)
+  async profile(@User() user: AuthenticatedUser) {
+    return this.usersService.findOne(user.id);
   }
 
   @Get()

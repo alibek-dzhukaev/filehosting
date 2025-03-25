@@ -13,7 +13,25 @@ export class CookieService {
     });
   }
 
-  clearCookie(response: Response, name: string): void {
+  clearJwt(response: Response) {
+    this.clearCookie(response, this.configService.getOrThrow('JWT_COOKIE'));
+  }
+
+  setPublicCsrf(response: Response, csrfToken: string) {
+    this.setCookie(
+      response,
+      this.configService.getOrThrow<string>('CSRF_PUBLIC_TOKEN'),
+      csrfToken,
+      { httpOnly: false }
+    );
+  }
+
+  clearCsrfTokens(response: Response) {
+    this.clearCookie(response, this.configService.getOrThrow('CSRF_PRIVATE_TOKEN'));
+    this.clearCookie(response, this.configService.getOrThrow('CSRF_PUBLIC_TOKEN'));
+  }
+
+  private clearCookie(response: Response, name: string): void {
     response.clearCookie(name, {
       httpOnly: true,
       secure: this.configService.get<string>('NODE_ENV') === 'production',
@@ -21,7 +39,7 @@ export class CookieService {
     });
   }
 
-  getCookie(request: Request, name: string): string | undefined {
+  private getCookie(request: Request, name: string): string | undefined {
     const cookies: Record<string, string> = request.cookies;
     return cookies[name];
   }

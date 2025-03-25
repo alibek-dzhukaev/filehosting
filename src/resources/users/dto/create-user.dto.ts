@@ -8,7 +8,7 @@ import {
   IsString,
 } from 'class-validator';
 
-import { Role } from '../../../common/roles/constants/roles.constant';
+import { Role } from '@common/roles/constants/roles.constant';
 
 export class CreateUserDto {
   @IsString()
@@ -43,13 +43,9 @@ export class CreateUserDto {
   @IsOptional()
   readonly city?: string;
 
-  @IsString()
-  @IsOptional()
-  readonly country?: string;
-
   @IsDateString()
   @IsOptional()
-  readonly dateOfBirth?: string;
+  readonly dateOfBirthday?: string;
 
   @IsString()
   @IsOptional()
