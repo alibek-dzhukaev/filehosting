@@ -8,7 +8,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import * as redisStore from 'cache-manager-redis-store';
 
 import { BullMQModule } from '@common/bullmq/bullmq.module';
-import { CsrfModule } from '@common/csrf/csrf.module';
 import { DatabaseService } from '@common/database/database.service';
 import { RedisCacheService } from '@common/redis/redisCache.service';
 import { SseModule } from '@common/sse/sse.module';
@@ -16,10 +15,10 @@ import { SseModule } from '@common/sse/sse.module';
 import { validationSchema } from '@config/validation.schema';
 
 import { AuthModule } from '@resources/auth/auth.module';
+import { ChannelsModule } from '@resources/channels/channels.module';
 import { UsersModule } from '@resources/users/users.module';
 
 import configuration from './config/configuration';
-import { ChannelsModule } from './resources/channels/channels.module';
 
 @Module({
   imports: [
@@ -69,7 +68,7 @@ import { ChannelsModule } from './resources/channels/channels.module';
         ],
       }),
     }),
-    CsrfModule,
+    // CsrfModule,
     SseModule,
     BullMQModule,
     AuthModule,

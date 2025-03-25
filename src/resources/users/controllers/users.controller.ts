@@ -10,9 +10,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 
-import { Role } from '../../../common/roles/constants/roles.constant';
-import { Roles } from '../../../common/roles/decorators/roles.decorator';
-import { RolesGuard } from '../../../common/roles/guards/roles.guard';
+import { Role } from '@common/roles/constants/roles.constant';
+import { Roles } from '@common/roles/decorators/roles.decorator';
+import { RolesGuard } from '@common/roles/guards/roles.guard';
+
 import { User } from '../../auth/decorators/user.decorator';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { AuthenticatedUser } from '../../auth/types/authenticatedUser';
@@ -64,5 +65,12 @@ export class UsersController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
+  }
+
+  @Get('profile')
+  @UseGuards(JwtAuthGuard)
+  getProfile(@User() user: AuthenticatedUser) {
+    console.log('user', user);
+    return { data: 'ok' };
   }
 }

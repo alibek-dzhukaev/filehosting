@@ -1,4 +1,4 @@
-import { Role } from '../../../common/roles/constants/roles.constant';
+import { Role } from '@common/roles/constants/roles.constant';
 
 export interface AuthenticatedUser {
   id: string;

@@ -6,25 +6,25 @@ import { ChannelsRepository } from '../repositories/channels.repository';
 
 @Injectable()
 export class ChannelsService {
-  constructor(private readonly channelsReposiroty: ChannelsRepository) {}
+  constructor(private readonly channelsRepository: ChannelsRepository) {}
 
   create(createChannelDto: CreateChannelDto) {
-    return this.channelsReposiroty.create(createChannelDto);
+    return this.channelsRepository.create(createChannelDto);
   }
 
   findAll() {
-    return this.channelsReposiroty.findAll();
+    return this.channelsRepository.findAll();
   }
 
   findOne(id: string) {
-    return this.channelsReposiroty.findOneById(id);
+    return this.channelsRepository.findOneById(id);
   }
 
   update(id: string, updateChannelDto: UpdateChannelDto) {
-    return this.channelsReposiroty.update(id, updateChannelDto);
+    return this.channelsRepository.update(id, updateChannelDto);
   }
 
   remove(id: string) {
-    return this.channelsReposiroty.delete(id);
+    return this.channelsRepository.delete(id);
   }
 }

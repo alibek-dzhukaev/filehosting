@@ -1,9 +1,13 @@
-import { Controller, Post, Body, Res, HttpStatus } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Res, UseGuards } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { Response } from 'express';
 
 import { CookieService } from '@common/cookie/services/cookie.service';
+
+import { User } from '@resources/auth/decorators/user.decorator';
+import { JwtAuthGuard } from '@resources/auth/guards/jwt-auth.guard';
+import { AuthenticatedUser } from '@resources/auth/types/authenticatedUser';
 
 import { LoginDto } from '../dto/login.dto';
 import { RegisterDto } from '../dto/register.dto';
@@ -30,9 +34,18 @@ export class AuthController {
     return this.authService.register(registerDto);
   }
 
+  @Post('me')
+  @UseGuards(JwtAuthGuard)
+  me(@User() user: AuthenticatedUser) {
+    console.log('user', user);
+    return user;
+  }
+
   @Post('logout')
+  @UseGuards(JwtAuthGuard)
   logout(@Res() response: Response) {
-    this.cookieService.clearCookie(response, this.configService.getOrThrow('JWT_COOKIE'));
+    this.cookieService.clearJwt(response);
+    this.cookieService.clearCsrfTokens(response);
     response.status(HttpStatus.OK).json({ message: 'successful' });
   }
 }
