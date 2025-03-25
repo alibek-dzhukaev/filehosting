@@ -4,11 +4,13 @@ import {
   Delete,
   ForbiddenException,
   Get,
+  HttpStatus,
   Param,
   Patch,
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { ApiOkResponse, ApiResponse } from '@nestjs/swagger';
 
 import { Role } from '@common/roles/constants/roles.constant';
 import { Roles } from '@common/roles/decorators/roles.decorator';
@@ -30,6 +32,16 @@ export class UsersController {
   @Roles(Role.ADMIN, Role.SUPER_ADMIN)
   async create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
+  }
+
+  @Post('profile')
+  @ApiOkResponse()
+  @ApiResponse({
+    status: HttpStatus.OK,
+  })
+  @UseGuards(JwtAuthGuard)
+  async profile(@User() user: AuthenticatedUser) {
+    return this.usersService.findOne(user.id);
   }
 
   @Get()
@@ -65,12 +77,5 @@ export class UsersController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
-  }
-
-  @Get('profile')
-  @UseGuards(JwtAuthGuard)
-  getProfile(@User() user: AuthenticatedUser) {
-    console.log('user', user);
-    return { data: 'ok' };
   }
 }

@@ -43,13 +43,9 @@ export class CreateUserDto {
   @IsOptional()
   readonly city?: string;
 
-  @IsString()
-  @IsOptional()
-  readonly country?: string;
-
   @IsDateString()
   @IsOptional()
-  readonly dateOfBirth?: string;
+  readonly dateOfBirthday?: string;
 
   @IsString()
   @IsOptional()
