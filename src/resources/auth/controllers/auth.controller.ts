@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, Post, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Res, UseGuards } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
 import { Response } from 'express';
@@ -34,7 +34,7 @@ export class AuthController {
     return this.authService.register(registerDto);
   }
 
-  @Post('me')
+  @Get('me')
   @UseGuards(JwtAuthGuard)
   me(@User() user: AuthenticatedUser) {
     return user;
