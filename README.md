@@ -59,18 +59,18 @@ cp .env.example .env.development
 
 4) Build Docker Compose
 ```bash
-docker-compose build
+make build
 ```
 
 
 5Run Docker Compose
 ```bash
-docker-compose up -d
+make up
 ```
 
 6) Run migrations:
 ```bash
-pnpm run migration:run
+make migrate
 ```
 
 7) Access the application:

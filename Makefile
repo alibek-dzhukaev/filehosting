@@ -1,4 +1,4 @@
-.PHONY: up down restart logs clean build
+.PHONY: up down restart logs clean build migrate migrate-generate
 
 include ./.env.development
 
@@ -32,3 +32,15 @@ clean: down
 
 ps:
 	docker-compose $(COMPOSE_FILES) ps
+
+# Run database migrations
+migrate:
+	docker-compose $(COMPOSE_FILES) exec node pnpm migration:run
+
+# Generate new migration file
+# Usage: make migrate-generate name=MigrationName
+migrate-generate:
+ifndef name
+	$(error Please specify migration name with name= parameter)
+endif
+	docker-compose $(COMPOSE_FILES) exec node pnpm migration:generate $(name)
