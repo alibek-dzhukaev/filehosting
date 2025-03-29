@@ -19,6 +19,8 @@ import { ChannelsModule } from '@resources/channels/channels.module';
 import { UsersModule } from '@resources/users/users.module';
 
 import configuration from './config/configuration';
+import { KafkaModule } from './infrastructure/messaging/kafka.module';
+import { StorageModule } from './infrastructure/storage/storage.module';
 
 @Module({
   imports: [
@@ -71,6 +73,8 @@ import configuration from './config/configuration';
     // CsrfModule,
     SseModule,
     BullMQModule,
+    KafkaModule,
+    StorageModule,
     AuthModule,
     UsersModule,
     ChannelsModule,

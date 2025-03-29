@@ -20,6 +20,7 @@
     "paths": {
       "@app/*": ["src/*"],
       "@common/*": ["src/common/*"],
+      "@infrastructure/*": ["src/infrastructure/*"],
       "@config/*": ["src/config/*"],
       "@resources/*": ["src/resources/*"]
     }

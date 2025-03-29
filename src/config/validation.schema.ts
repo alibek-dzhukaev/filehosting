@@ -21,11 +21,12 @@ export const validationSchema = Joi.object({
   THROTTLER_LIMIT: Joi.string().required(),
   // sentry validation
   SENTRY_DSN: Joi.string().required(),
+  // kafka validation
+  KAFKA_BROKERS: Joi.string().required(),
+  KAFKA_CLIENT_ID: Joi.string().required(),
+  KAFKA_CONSUMER_GROUP: Joi.string().required(),
 
   NODE_ENV: Joi.string().default('development'),
-
-  API_KEY: Joi.string().required(),
-  API_URL: Joi.string().uri().required(),
   PORT: Joi.string().required(),
   GLOBAL_PREFIX: Joi.string().required(),
 });
