@@ -12,9 +12,9 @@ import {
 } from '@nestjs/common';
 import { ApiOkResponse, ApiResponse } from '@nestjs/swagger';
 
-import { Role } from '@common/roles/constants/roles.constant';
-import { Roles } from '@common/roles/decorators/roles.decorator';
-import { RolesGuard } from '@common/roles/guards/roles.guard';
+import { Role } from '@application/common/roles/constants/roles.constant';
+import { Roles } from '@application/common/roles/decorators/roles.decorator';
+import { RolesGuard } from '@application/common/roles/guards/roles.guard';
 
 import { User } from '../../auth/decorators/user.decorator';
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';

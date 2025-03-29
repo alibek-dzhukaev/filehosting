@@ -7,11 +7,11 @@ import * as Sentry from '@sentry/node';
 import * as cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 
-import { CsrfExceptionFilter } from '@common/csrf/filters/csrf-exception.filter';
-import { runMigrations } from '@common/database/migrations';
-import { HttpExceptionFilter } from '@common/filters/http-exception.filter';
-import { ValidationExceptionFilter } from '@common/filters/validation-exception.filter';
-import { LoggingInterceptor } from '@common/interceptors/logging.interceptor';
+import { CsrfExceptionFilter } from '@application/common/csrf/filters/csrf-exception.filter';
+import { HttpExceptionFilter } from '@application/common/filters/http-exception.filter';
+import { ValidationExceptionFilter } from '@application/common/filters/validation-exception.filter';
+import { LoggingInterceptor } from '@application/common/interceptors/logging.interceptor';
+import { runMigrations } from '@application/database/migrations';
 
 import { AppModule } from './app.module';
 import { AppDataSource } from './data-source';
@@ -70,4 +70,7 @@ async function bootstrap() {
   });
 }
 
-bootstrap().catch(console.error);
+bootstrap().catch((error) => {
+  console.log(error);
+  process.exit(1);
+});

@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { doubleCsrf } from 'csrf-csrf';
 import { NextFunction, Request, Response } from 'express';
 
-import { CookieService } from '@common/cookie/services/cookie.service';
+import { CookieService } from '@application/common/cookie/services/cookie.service';
 
 @Injectable()
 export class CsrfMiddleware implements NestMiddleware {

@@ -1,7 +1,7 @@
 import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { DatabaseService } from '../../src/common/database/database.service';
+import { DatabaseService } from '../../src/application/database/database.service';
 
 describe('DatabaseService', () => {
   let service: DatabaseService;

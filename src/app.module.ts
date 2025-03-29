@@ -7,15 +7,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import * as redisStore from 'cache-manager-redis-store';
 
-import { BullMQModule } from '@common/bullmq/bullmq.module';
-import { DatabaseService } from '@common/database/database.service';
-import { RedisCacheService } from '@common/redis/redisCache.service';
-import { SseModule } from '@common/sse/sse.module';
+import { BullMQModule } from '@application/bullmq/bullmq.module';
+import { DatabaseService } from '@application/database/database.service';
+import { RedisCacheService } from '@application/redis/redisCache.service';
+import { SseModule } from '@application/sse/sse.module';
 
 import { validationSchema } from '@config/validation.schema';
 
+import { KafkaModule } from '@infrastructure/messaging/kafka.module';
+import { StorageModule } from '@infrastructure/storage/storage.module';
+
 import { AuthModule } from '@resources/auth/auth.module';
 import { ChannelsModule } from '@resources/channels/channels.module';
+import { HealthModule } from '@resources/health/health.module';
 import { UsersModule } from '@resources/users/users.module';
 
 import configuration from './config/configuration';
@@ -71,9 +75,12 @@ import configuration from './config/configuration';
     // CsrfModule,
     SseModule,
     BullMQModule,
+    KafkaModule,
+    StorageModule,
     AuthModule,
     UsersModule,
     ChannelsModule,
+    HealthModule,
   ],
   providers: [
     DatabaseService,
