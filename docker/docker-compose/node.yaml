@@ -6,7 +6,7 @@ services:
       context: ../..
       target: development
     ports:
-      - '3000:3000'
+      - '${NODE_PORT:-3000}:3000'
     env_file:
       - ../../.env.development
     volumes:
@@ -22,7 +22,7 @@ services:
       kafka:
         condition: service_healthy
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health/kafka"]
+      test: ["CMD", "curl", "-f", "http://localhost:${NODE_PORT:-3000}/health/kafka"]
       interval: 30s
       timeout: 10s
       retries: 3
