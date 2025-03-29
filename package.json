@@ -23,8 +23,7 @@
     "migration:revert": "node scripts/revert-migrations.js",
     "audit": "pnpm audit",
     "snyk": "npx snyk test",
-    "prepare": "husky install",
-    "gen:mig": "docker compose exec node pnpm migration:generate"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@commitlint/cli": "^19.8.0",
