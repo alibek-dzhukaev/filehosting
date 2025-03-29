@@ -2,6 +2,8 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 
 import { plainToInstance } from 'class-transformer';
 
+import { MessageReadStatusService } from '@resources/message-read-status/services/message-read-status.service';
+
 import { CreateMessageDto } from '../dto/create-message.dto';
 import { MessageResponseDto } from '../dto/message-response.dto';
 import { UpdateMessageDto } from '../dto/update-message.dto';
@@ -12,7 +14,8 @@ import { IMessagesRepository } from '../repositories/repository.interface';
 export class MessagesService {
   constructor(
     @Inject('IMessagesRepository')
-    private readonly messagesRepository: IMessagesRepository
+    private readonly messagesRepository: IMessagesRepository,
+    private readonly readStatusService: MessageReadStatusService
   ) {}
 
   async createMessage(
@@ -59,6 +62,23 @@ export class MessagesService {
       throw new NotFoundException('Message not found');
     }
     return message;
+  }
+
+  async getMessageWithReadStatus(messageId: string, userId: string) {
+    const message = await this.messagesRepository.findById(messageId);
+    if (!message) {
+      throw new NotFoundException('Message not found');
+    }
+
+    const readStatus = await this.readStatusService.getMessageReadStatus(messageId);
+    const userReadStatus = readStatus.find((status) => status.user.id === userId);
+
+    return {
+      ...message,
+      readStatus,
+      isRead: !!userReadStatus,
+      readAt: userReadStatus?.readAt,
+    };
   }
 
   async getDirectThreadMessages(threadId: string): Promise<MessageResponseDto[]> {
