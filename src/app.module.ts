@@ -19,6 +19,7 @@ import { StorageModule } from '@infrastructure/storage/storage.module';
 
 import { AuthModule } from '@resources/auth/auth.module';
 import { ChannelsModule } from '@resources/channels/channels.module';
+import { HealthModule } from '@resources/health/health.module';
 import { UsersModule } from '@resources/users/users.module';
 
 import configuration from './config/configuration';
@@ -79,6 +80,7 @@ import configuration from './config/configuration';
     AuthModule,
     UsersModule,
     ChannelsModule,
+    HealthModule,
   ],
   providers: [
     DatabaseService,
