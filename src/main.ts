@@ -20,7 +20,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
 
   const configService = app.get(ConfigService);
-  const port = configService.get<number>('PORT', 3000);
+  const port = configService.get<number>('NODE_PORT', 3000);
 
   if (configService.get('RUN_MIGRATIONS') === '1') {
     await runMigrations(AppDataSource);

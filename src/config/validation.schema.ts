@@ -27,6 +27,6 @@ export const validationSchema = Joi.object({
   KAFKA_CONSUMER_GROUP: Joi.string().required(),
 
   NODE_ENV: Joi.string().default('development'),
-  PORT: Joi.string().required(),
+  NODE_PORT: Joi.string().required(),
   GLOBAL_PREFIX: Joi.string().required(),
 });
