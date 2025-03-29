@@ -8,5 +8,6 @@ export interface IMessagesRepository {
   delete(userId: string, messageId: string): Promise<void>;
   findChannelMessages(channelId: string): Promise<Message[]>;
   findDirectMessages(userId: string, recipientId: string): Promise<Message[]>;
+  findDirectThreadMessages(threadId: string): Promise<Message[]>;
   findById(id: string): Promise<Message | null>;
 }

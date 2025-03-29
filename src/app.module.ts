@@ -24,6 +24,8 @@ import { HealthModule } from '@resources/health/health.module';
 import { MessagesModule } from '@resources/messages/messages.module';
 import { UsersModule } from '@resources/users/users.module';
 
+import { DirectMessagesModule } from './resources/direct-messages/direct-messages.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -81,6 +83,7 @@ import { UsersModule } from '@resources/users/users.module';
     UsersModule,
     ChannelsModule,
     MessagesModule,
+    DirectMessagesModule,
     HealthModule,
   ],
   providers: [

@@ -8,6 +8,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import { DirectMessageThread } from '@root/resources/direct-messages/entities/direct-message-thread.entity';
+
 import { Channel } from '../../channels/entities/channel.entity';
 import { User } from '../../users/entities/user.entity';
 
@@ -18,18 +20,6 @@ export class Message {
 
   @Column('text')
   content: string;
-
-  @ManyToOne(() => User, { eager: true })
-  @JoinColumn({ name: 'sender_id' })
-  sender: User;
-
-  @ManyToOne(() => Channel, { nullable: true })
-  @JoinColumn({ name: 'channel_id' })
-  channel: Channel | null;
-
-  @ManyToOne(() => User, { nullable: true })
-  @JoinColumn({ name: 'recipient_id' })
-  recipient: User | null;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -45,4 +35,20 @@ export class Message {
 
   @Column({ type: 'jsonb', nullable: true })
   metadata: any;
+
+  @ManyToOne(() => User, { eager: true })
+  @JoinColumn({ name: 'sender_id' })
+  sender: User;
+
+  @ManyToOne(() => Channel, { nullable: true })
+  @JoinColumn({ name: 'channel_id' })
+  channel: Channel | null;
+
+  @ManyToOne(() => User, { nullable: true })
+  @JoinColumn({ name: 'recipient_id' })
+  recipient: User | null;
+
+  @ManyToOne(() => DirectMessageThread, { nullable: true })
+  @JoinColumn({ name: 'direct_thread_id' })
+  directThread: DirectMessageThread | null;
 }

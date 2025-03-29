@@ -1,4 +1,9 @@
-import { Expose } from 'class-transformer';
+import { Expose, Type } from 'class-transformer';
+
+import { UserResponseDto } from '@resources/users/dto/user-response.dto';
+
+import { ChannelResponseDto } from '../../channels/dto/channel-response.dto';
+import { DirectMessageThreadResponseDto } from '../../direct-messages/dto/direct-message-thread-response.dto';
 
 export class MessageResponseDto {
   @Expose()
@@ -8,21 +13,23 @@ export class MessageResponseDto {
   content: string;
 
   @Expose()
-  sender: {
-    id: string;
-    username: string;
-    avatar?: string;
-  };
+  @Type(() => UserResponseDto)
+  sender: UserResponseDto;
 
   @Expose()
-  channelId?: string;
+  @Type(() => ChannelResponseDto)
+  channel?: ChannelResponseDto;
 
   @Expose()
-  recipientId?: string;
+  @Type(() => DirectMessageThreadResponseDto)
+  directThread?: DirectMessageThreadResponseDto;
 
   @Expose()
   createdAt: Date;
 
   @Expose()
   isEdited: boolean;
+
+  @Expose()
+  isDeleted: boolean;
 }

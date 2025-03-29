@@ -39,8 +39,11 @@ export class KafkaHealthIndicator {
 
       // 5. Format healthy response
       return indicator.up(this.formatHealthResponse(brokers, controller, clusterId, topics.length));
-    } catch (error) {
-      return indicator.down(this.formatErrorResponse(error));
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return indicator.down(this.formatErrorResponse(error));
+      }
+      return indicator.down({ error });
     } finally {
       if (isConnected) {
         await this.admin.disconnect();

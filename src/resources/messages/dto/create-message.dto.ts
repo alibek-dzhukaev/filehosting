@@ -12,4 +12,8 @@ export class CreateMessageDto {
   @IsOptional()
   @IsUUID()
   recipientId?: string;
+
+  @IsOptional()
+  @IsUUID()
+  directThreadId?: string;
 }

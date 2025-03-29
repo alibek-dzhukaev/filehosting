@@ -104,4 +104,12 @@ export class MessagesRepository implements IMessagesRepository {
       relations: ['sender', 'channel', 'recipient'],
     });
   }
+
+  async findDirectThreadMessages(threadId: string): Promise<Message[]> {
+    return this.messageRepository.find({
+      where: { directThread: { id: threadId }, isDeleted: false },
+      relations: ['sender', 'directThread'],
+      order: { createdAt: 'ASC' },
+    });
+  }
 }
