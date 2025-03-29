@@ -1,10 +1,10 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { KAFKA_CONFIG } from '@app/config/constants';
+import { KAFKA_CONFIG } from '@config/constants';
+import { KafkaConfig } from '@config/kafka.config';
 
-import { KafkaConfig } from '../../config/kafka.config';
-import { KafkaService } from '../../infrastructure/messaging/kafka.service';
+import { KafkaService } from '@infrastructure/messaging/kafka.service';
 
 @Injectable()
 export class MessageConsumer implements OnModuleInit {

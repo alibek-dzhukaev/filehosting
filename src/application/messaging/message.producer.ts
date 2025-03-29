@@ -3,11 +3,10 @@ import { ConfigService } from '@nestjs/config';
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { KAFKA_CONFIG } from '@app/config/constants';
+import { KAFKA_CONFIG } from '@config/constants';
+import { KafkaConfig } from '@config/kafka.config';
 
 import { KafkaService } from '@infrastructure/messaging/kafka.service';
-
-import { KafkaConfig } from '@config/kafka.config';
 
 @Injectable()
 export class MessageProducer {

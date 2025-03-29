@@ -8,7 +8,7 @@ import {
   IsString,
 } from 'class-validator';
 
-import { Role } from '@common/roles/constants/roles.constant';
+import { Role } from '@application/common/roles/constants/roles.constant';
 
 export class CreateUserDto {
   @IsString()

@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 
 import { Response } from 'express';
 
-import { CookieService } from '@common/cookie/services/cookie.service';
+import { CookieService } from '@application/common/cookie/services/cookie.service';
 
 import { User } from '@resources/auth/decorators/user.decorator';
 import { JwtAuthGuard } from '@resources/auth/guards/jwt-auth.guard';

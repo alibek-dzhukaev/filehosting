@@ -3,8 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 
-import { CookieModule } from '@common/cookie/cookie.module';
-import { CsrfModule } from '@common/csrf/csrf.module';
+import { CookieModule } from '@application/common/cookie/cookie.module';
 
 import { UsersModule } from '../users/users.module';
 
@@ -17,7 +16,6 @@ import { JwtStrategy } from './strategies/jwt.strategy';
   imports: [
     forwardRef(() => UsersModule),
     PassportModule,
-    CsrfModule,
     CookieModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],

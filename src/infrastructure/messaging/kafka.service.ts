@@ -3,8 +3,7 @@ import { ConfigService } from '@nestjs/config';
 
 import { Kafka, Producer, Consumer, EachMessagePayload } from 'kafkajs';
 
-import { KAFKA_CONFIG } from '@app/config/constants';
-
+import { KAFKA_CONFIG } from '@config/constants';
 import { KafkaConfig } from '@config/kafka.config';
 
 @Injectable()

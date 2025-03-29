@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { Observable, Subject, interval } from 'rxjs';
 
-import { MessageEvent } from '../types/sse';
+import { MessageEvent } from '../common/types/sse';
 
 @Injectable()
 export class SseService {

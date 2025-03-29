@@ -18,10 +18,10 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/*": ["src/*"],
-      "@common/*": ["src/common/*"],
-      "@infrastructure/*": ["src/infrastructure/*"],
+      "@root/*": ["src/*"],
+      "@application/*": ["src/application/*"],
       "@config/*": ["src/config/*"],
+      "@infrastructure/*": ["src/infrastructure/*"],
       "@resources/*": ["src/resources/*"]
     }
   }

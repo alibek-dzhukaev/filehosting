@@ -47,22 +47,22 @@ export default tseslint.config(
             position: 'before',
           },
           {
-            pattern: '@app/**',
+            pattern: '@root/**',
             group: 'internal',
             position: 'before',
           },
           {
-            pattern: '@common/**',
-            group: 'internal',
-            position: 'before',
-          },
-          {
-            pattern: '@infrastructure/**',
+            pattern: '@application/**',
             group: 'internal',
             position: 'before',
           },
           {
             pattern: '@config/**',
+            group: 'internal',
+            position: 'before',
+          },
+          {
+            pattern: '@infrastructure/**',
             group: 'internal',
             position: 'before',
           },
