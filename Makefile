@@ -1,4 +1,4 @@
-.PHONY: up down restart logs clean build migrate migrate-generate
+.PHONY: up down restart logs clean pull build migrate migrate-generate
 
 include ./.env.development
 
@@ -12,30 +12,33 @@ COMPOSE_FILES := -f docker/docker-compose/base.yaml \
                  -f docker-compose.override.yml
 
 up:
-	docker-compose $(COMPOSE_FILES) up
+	docker compose $(COMPOSE_FILES) up
 
 down:
-	docker-compose $(COMPOSE_FILES) down
+	docker compose $(COMPOSE_FILES) down
 
 build:
-	docker-compose $(COMPOSE_FILES) build
+	docker compose $(COMPOSE_FILES) build
+
+pull:
+	docker compose $(COMPOSE_FILES) pull
 
 restart:
-	docker-compose $(COMPOSE_FILES) restart
+	docker compose $(COMPOSE_FILES) restart
 
 logs:
-	docker-compose $(COMPOSE_FILES) logs -f
+	docker compose $(COMPOSE_FILES) logs -f
 
 clean: down
 	docker volume rm docker_postgres_data docker_redis_data
 	docker system prune -f
 
 ps:
-	docker-compose $(COMPOSE_FILES) ps
+	docker compose $(COMPOSE_FILES) ps
 
 # Run database migrations
 migrate:
-	docker-compose $(COMPOSE_FILES) exec node pnpm migration:run
+	docker compose $(COMPOSE_FILES) exec node pnpm migration:run
 
 # Generate new migration file
 # Usage: make migrate-generate name=MigrationName
@@ -43,4 +46,4 @@ migrate-generate:
 ifndef name
 	$(error Please specify migration name with name= parameter)
 endif
-	docker-compose $(COMPOSE_FILES) exec node pnpm migration:generate $(name)
+	docker compose $(COMPOSE_FILES) exec node pnpm migration:generate $(name)
