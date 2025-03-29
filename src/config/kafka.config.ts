@@ -16,7 +16,7 @@ export interface KafkaConfig {
 export default registerAs(
   KAFKA_CONFIG,
   (): KafkaConfig => ({
-    brokers: process.env.KAFKA_BROKERS?.split(',') || ['localhost:9092'],
+    brokers: process.env.KAFKA_BROKERS?.split(',') || ['kafka:9092'],
     clientId: process.env.KAFKA_CLIENT_ID || 'chat-service',
     consumerGroup: process.env.KAFKA_CONSUMER_GROUP || 'chat-service-group',
     topics: {
