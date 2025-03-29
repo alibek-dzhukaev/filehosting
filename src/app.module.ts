@@ -24,6 +24,7 @@ import { HealthModule } from '@resources/health/health.module';
 import { MessagesModule } from '@resources/messages/messages.module';
 import { UsersModule } from '@resources/users/users.module';
 
+import { ChannelMembersModule } from './resources/channel-members/channel-members.module';
 import { DirectMessagesModule } from './resources/direct-messages/direct-messages.module';
 
 @Module({
@@ -84,6 +85,7 @@ import { DirectMessagesModule } from './resources/direct-messages/direct-message
     ChannelsModule,
     MessagesModule,
     DirectMessagesModule,
+    ChannelMembersModule,
     HealthModule,
   ],
   providers: [

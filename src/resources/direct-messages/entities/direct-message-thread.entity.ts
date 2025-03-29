@@ -12,7 +12,7 @@ import {
 import { Message } from '../../messages/entities/message.entity';
 import { User } from '../../users/entities/user.entity';
 
-@Entity()
+@Entity({ name: 'direct_message_thread' })
 export class DirectMessageThread {
   @PrimaryGeneratedColumn('uuid')
   id: string;
