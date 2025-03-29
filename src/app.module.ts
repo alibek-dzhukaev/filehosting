@@ -12,6 +12,7 @@ import { DatabaseService } from '@application/database/database.service';
 import { RedisCacheService } from '@application/redis/redisCache.service';
 import { SseModule } from '@application/sse/sse.module';
 
+import configuration from '@config/configuration';
 import { validationSchema } from '@config/validation.schema';
 
 import { KafkaModule } from '@infrastructure/messaging/kafka.module';
@@ -20,9 +21,8 @@ import { StorageModule } from '@infrastructure/storage/storage.module';
 import { AuthModule } from '@resources/auth/auth.module';
 import { ChannelsModule } from '@resources/channels/channels.module';
 import { HealthModule } from '@resources/health/health.module';
+import { MessagesModule } from '@resources/messages/messages.module';
 import { UsersModule } from '@resources/users/users.module';
-
-import configuration from './config/configuration';
 
 @Module({
   imports: [
@@ -80,6 +80,7 @@ import configuration from './config/configuration';
     AuthModule,
     UsersModule,
     ChannelsModule,
+    MessagesModule,
     HealthModule,
   ],
   providers: [
