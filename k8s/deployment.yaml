@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-hosting
+  labels:
+    app: file-hosting
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: file-hosting
+  template:
+    metadata:
+      labels:
+        app: file-hosting
+    spec:
+      containers:
+        - name: file-hosting
+          image: alibekdzhukaev/filehosting:0.0.1
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 200m
+              memory: 300Mi
+            limits:
+              memory: 400Mi
+          env:
+            - name: ENV
+              value: "DUCK"

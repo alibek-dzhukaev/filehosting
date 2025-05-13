@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: file-hosting
+
+spec:
+  rules:
+    - host: k8s.filehosting.com
+      http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name:  file-hosting
+                port:
+                  number: 80
