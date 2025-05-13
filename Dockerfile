@@ -5,6 +5,7 @@ FROM node:20-alpine AS base
 
 # Install pnpm globally as root
 USER root
+RUN apk add --no-cache jq
 RUN npm install -g pnpm
 
 # Create a non-root user and group if they don't already exist
@@ -42,7 +43,9 @@ FROM base AS production
 
 # Copy only production dependencies from the builder stage
 COPY --from=builder --chown=appuser:appgroup /app/package.json /app/pnpm-lock.yaml ./
-RUN pnpm install --prod --frozen-lockfile
+RUN jq 'del(.scripts.prepare)' package.json > package.tmp.json && \
+    mv package.tmp.json package.json && \
+    pnpm install --prod --frozen-lockfile --ignore-scripts
 
 # Copy the built application from the builder stage
 COPY --from=builder --chown=appuser:appgroup /app/dist ./dist
