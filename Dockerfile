@@ -45,7 +45,7 @@ FROM base AS production
 COPY --from=builder --chown=appuser:appgroup /app/package.json /app/pnpm-lock.yaml ./
 RUN jq 'del(.scripts.prepare)' package.json > package.tmp.json && \
     mv package.tmp.json package.json && \
-    pnpm install --prod --frozen-lockfile --ignore-scripts
+    pnpm install --prod --frozen-lockfile
 
 # Copy the built application from the builder stage
 COPY --from=builder --chown=appuser:appgroup /app/dist ./dist
