@@ -1,4 +1,4 @@
-.PHONY: up down restart logs clean pull build migrate migrate-generate
+.PHONY: up down ps restart logs clean pull build migrate migrate-generate
 
 include ./.env.development
 
@@ -9,6 +9,7 @@ COMPOSE_FILES := -f docker/docker-compose/base.yaml \
                  -f docker/docker-compose/kafka-ui.yaml \
                  -f docker/docker-compose/node.yaml \
                  -f docker/docker-compose/nginx.yaml \
+                 -f docker/docker-compose/filehosting-messages.yaml \
                  -f docker-compose.override.yml
 
 up:

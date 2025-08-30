@@ -1,0 +1,17 @@
+services:
+    filehosting-messages:
+      image: node:20-alpine
+      container_name: filehosting-messages
+      build:
+        context: ../../../filehosting-messages
+        dockerfile: Dockerfile
+        target: development
+      ports:
+        - "${MESSAGES_PORT:-3001}:3001"
+      env_file:
+        - ../../.env.development
+      environment:
+        - NODE_ENV=development
+      depends_on:
+        node:
+          condition: service_started
